@@ -1,6 +1,8 @@
 import { Board } from "./Components/Board/Board"
 import { Rules } from './Components/Rules/Rules'
 import { Ruleset } from "./Services/rules"
+import { Container, Row, Col} from "react-bootstrap";
+import './styles.scss';
 import './App.css'
 export const App = () =>{
    let board = [
@@ -20,11 +22,15 @@ export const App = () =>{
    };
   
    return(
-      <div className = 'mainContainer'>
-         <div className='boardContainer'>
-            <Board board = {board}/>
-         </div>
-         <Rules ruleset={rules} boardSize={8}/>
-      </div>
+      <Container>
+         <Row>
+            <Col xs={12} md={8}>
+               <Board board = {board}/>
+            </Col>
+            <Col xs={6} md={4}>
+               <Rules ruleset={rules} boardSize={8}/>
+            </Col>
+         </Row>   
+      </Container>
    ); 
 }
