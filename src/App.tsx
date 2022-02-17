@@ -2,19 +2,10 @@ import { Board } from "./Components/Board/Board"
 import { Rules } from './Components/Rules/Rules'
 import { Ruleset} from "./Services/rules"
 import { AppShell, Burger, Header, MediaQuery, Navbar, Text, useMantineTheme, Center, NativeSelect, Title, NumberInput } from '@mantine/core';
-import './styles.scss';
 import './App.css'
 import { useState } from "react";
 export const App = () =>{
-   let board = [
-      true,false,false,false,true,true,false,true,
-      false,true,false,false,false,true,true,false,
-      false,true,false,true,false,true,true,false,
-      false,false,true,true,false,true,true,false,
-      false,false,true,false,false,true,true,false,
-      false,true,false,false,false,true,true,false,
-      false,true,false,false,false,true,true,false,
-      false,true,false,false,false,true,true,false];
+   let board = Array<boolean>(2500).fill(false);
    let rules: Ruleset ={
       boardType: 'outsideDead',
       neighbourCount: 4,

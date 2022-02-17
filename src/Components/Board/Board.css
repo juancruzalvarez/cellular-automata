@@ -1,17 +1,17 @@
 .board{
-   width: calc(min(100%,80vh));
-   aspect-ratio: 1;
+
+   height: 80vh;
    grid-area: board;
    display:grid;
-   overflow: auto;
    
 }
 .cell{
    box-sizing: border-box;
    width: 100%;
-   min-width: 50px;
+   min-width: 25px;
    border: solid black 1px;
    border-radius: 0.3em;
+   aspect-ratio: 1;
 
 }
 .cell:hover{

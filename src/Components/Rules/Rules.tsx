@@ -1,6 +1,5 @@
-import './Rules.css'
-import {Ruleset, defaultRuleset, Condition, Neighbours} from '../../Services/rules'
-import {NativeSelect, Title, NumberInput, Group } from '@mantine/core';
+import {Ruleset, defaultRuleset, Condition, MAX_BOARD_SIZE,MIN_BOARD_SIZE, BoardType} from '../../Services/rules'
+import {NativeSelect, Title, NumberInput, Group, Button, Divider, Space } from '@mantine/core';
 import {useState } from 'react';
 
 type RulesProps = {
@@ -8,8 +7,8 @@ type RulesProps = {
 };
 
 export const Rules = ({onChange}: RulesProps) =>{
-   const [ruleset, setRuleset] = useState(defaultRuleset);
-   const [boardSize, setBoardSize] = useState(50);
+   const [ruleset, setRuleset] = useState<Ruleset>(defaultRuleset);
+   const [boardSize, setBoardSize] = useState<number>(50);
 
    return( 
       <>
@@ -22,14 +21,29 @@ export const Rules = ({onChange}: RulesProps) =>{
             ]}
             label="Board type:"
             radius="xs"
+            onChange={
+               (e) =>{
+                  let newBoardType = e.currentTarget.value as BoardType;
+                  setRuleset((last) =>{
+                     return {...last, boardType:newBoardType};
+                  });
+               }
+            }
          />
          <NumberInput
             defaultValue={25}
             label="Board size:"
-            min={10}
-            max={200}
+            min={MIN_BOARD_SIZE}
+            max={MAX_BOARD_SIZE}
             step={5}
+            onChange={
+               (newBoardSize) =>{
+                  if(newBoardSize!>=MIN_BOARD_SIZE && newBoardSize!<=MAX_BOARD_SIZE)
+                  setBoardSize(newBoardSize!);
+               }
+            }
          />
+
          <NativeSelect
             data={[
                { value: '4' , label: '4' },
@@ -37,17 +51,34 @@ export const Rules = ({onChange}: RulesProps) =>{
                ]}
             label="Neighbour count:"
             radius="xs"
+            onChange={
+               (e) =>{
+                  let newNeighbourCount = Number.parseInt(e.currentTarget.value) as (4|8);
+                  setRuleset((last) =>{
+                     return {...last, neighbourCount:newNeighbourCount};
+                  });
+               }
+            }
          />
+         <Space  h="md"/>
+         <Divider />
+         <Title order={4}>Life conditions:</Title>
          {
             ruleset.liveConditions.map( (element) =>{
                return <ConditionDisplay condition={element} neighbourCount={ruleset.neighbourCount} onChange={()=>{return;}}/>
             })
          }
+         <Button color={'lime'} variant="outline" size={'sm'} style={{marginTop:'0.5em'}}>+</Button>
+         <Space  h="md"/>
+         <Divider />
+         <Title order={4}>Death conditions:</Title>
          {
             ruleset.deathConditions.map( (element) =>{
                return <ConditionDisplay condition={element} neighbourCount={ruleset.neighbourCount} onChange={()=>{return;}}/>
             })
+            
          }
+         <Button color={'lime'} variant="outline" size={'sm'} style={{marginTop:'0.5em'}}>+</Button>
       </>
    );
 }
@@ -88,7 +119,6 @@ const ConditionDisplay = ({condition, neighbourCount, onChange}: ConditionDispla
    } 
    return ( 
       <>
-         <Title order={3}>Condition:</Title>
          <Group>
          <NativeSelect
             data={properties}
@@ -102,6 +132,9 @@ const ConditionDisplay = ({condition, neighbourCount, onChange}: ConditionDispla
             data={values}
             radius="xs"
          />
+         <Button color="red" size="md" compact>
+            X
+         </Button>
          </Group>
       </>
    );
