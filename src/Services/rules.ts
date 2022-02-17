@@ -1,4 +1,4 @@
-type BoardType = 'torus'|'outsideDead'|'outsideAlive';
+export type BoardType = 'torus'|'outsideDead'|'outsideAlive';
 
 type NeighbourCount = 4|8;
 
@@ -18,9 +18,13 @@ export type Ruleset = {
    deathConditions: Condition[];
    liveConditions: Condition[];
 };
+
 export const defaultRuleset: Ruleset ={
    boardType: 'outsideDead',
    neighbourCount: 4,
    deathConditions: [{property:'liveNeighbourCount',predicate:'greaterThan',value:4}],
    liveConditions: [{property:'liveNeighbourCount',predicate:'equals',value:3}]
  }
+
+ export const MAX_BOARD_SIZE = 50;
+ export const MIN_BOARD_SIZE = 10;
