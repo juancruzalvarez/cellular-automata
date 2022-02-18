@@ -2,19 +2,19 @@ import { ScrollArea } from '@mantine/core';
 import { CSSProperties } from 'react';
 import './Board.css';
 type BoardProps = {
-   board: boolean[];
+   board: boolean[],
+   onClickCell: (index: number)=>void
 };
-export const Board = ({board}: BoardProps) =>{
+export const Board = ({board, onClickCell}: BoardProps) =>{
    let boardSize = Math.sqrt(board.length);
-   console.log(boardSize);
    let style: CSSProperties = {
       gridTemplateColumns:`repeat(${boardSize}, 1fr)`,
       gridTemplateRows:`repeat(${boardSize}, 1fr)`
    };
    return (
-      <ScrollArea >
+      <ScrollArea style={{height:'80vh', aspectRatio:'1'}}>
          <div className='board' style={style}>
-            {board.map((element)=>{return <div className={element?'cell alive':'cell dead'}></div>})}
+            {board.map((element, index)=>{return <div className={element?'cell alive':'cell dead'} key={index} onClick={()=>onClickCell(index)}></div>})}
          </div>
       </ScrollArea>
    );

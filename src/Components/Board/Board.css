@@ -1,24 +1,23 @@
 .board{
-
-   height: 80vh;
-   grid-area: board;
    display:grid;
-   
 }
 .cell{
    box-sizing: border-box;
    width: 100%;
-   min-width: 25px;
-   border: solid black 1px;
+   min-width: 20px;
+   border: solid rgb(185, 185, 185) 1px;
    border-radius: 0.3em;
    aspect-ratio: 1;
+   -webkit-transition: background-color 200ms ease-out;
+    -ms-transition: background-color 200ms ease-out;
+    transition: background-color 200ms ease-out;
 
 }
 .cell:hover{
-   background-color: blueviolet;
+   background-color: #4c6ef5;
 }
 .alive{
-   background-color: greenyellow;
+   background-color: black;
 }
 .dead{
    background-color: white;
