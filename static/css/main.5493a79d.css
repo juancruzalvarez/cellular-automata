@@ -1,0 +1,2 @@
+.board{display:grid}.cell{aspect-ratio:1;border:1px solid #b9b9b9;border-radius:.3em;box-sizing:border-box;min-width:20px;transition:background-color .2s ease-out;width:100%}.cell:hover{background-color:#4c6ef5}.alive{background-color:#000}.dead{background-color:#fff}
+/*# sourceMappingURL=main.5493a79d.css.map*/
